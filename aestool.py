@@ -96,7 +96,7 @@ class QrWindow(QWidget):
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        fileh = QtCore.QFile('aestool.ui')
+        fileh = QtCore.QFile('aestools.ui')
         fileh.open(QtCore.QFile.ReadOnly)
         loadUi(fileh, self)
         self.setFixedSize(320, 290)
