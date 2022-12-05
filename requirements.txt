@@ -14,3 +14,5 @@ pyperclip == 1.8.2
 # D:\Code Project\Decrypt_AES\aestool.py: 13
 # D:\Code Project\Decrypt_AES\testAES.py: 6
 qrcode == 7.3.1
+
+auto-py-to-exe == 2.26.0

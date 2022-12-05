@@ -1,7 +1,7 @@
 import sys
 from PyQt5.uic import loadUi
 from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
+from PyQt5 import QtCore
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from libs.aesService import AESCipher
@@ -126,9 +126,9 @@ class MainWindow(QMainWindow):
         if self.rbAES.isChecked():
             aesCipher = AESCipher(passPhrase)
             encryptSuccess = aesCipher.encrypt(inputText)
-            self.txtOutput.setPlainText(encryptSuccess.decode("utf-8"))
+            self.txtOutput.setPlainText(encryptSuccess)
             logging.info(
-                'AES - Encrypt: {}'.format(encryptSuccess.decode("utf-8")))
+                'AES - Encrypt: {}'.format(encryptSuccess))
         elif self.rbRSA.isChecked():
             rsaCipher = RSAService(rsaConfig['private'], rsaConfig['public'])
             encryptSuccess = rsaCipher.encrypt(inputText)
@@ -144,10 +144,11 @@ class MainWindow(QMainWindow):
             aesCipher = AESCipher(passPhrase)
             decryptSuccess = aesCipher.decrypt(inputText)
         elif self.rbRSA.isChecked():
-            rsaCipher = RSAService(rsaConfig['private'], rsaConfig['public'])
+            rsaCipher = RSAService(
+                rsaConfig['private'], rsaConfig['public'])
             decryptSuccess = rsaCipher.decrypt(inputText)
 
-        self.txtOutput.setPlainText(decryptSuccess)
+        self.txtOutput.setPlainText(decryptSuccess if decryptSuccess else 'Invalid Data')
 
     def showQr(self):
         decryptSuccess = self.txtOutput.toPlainText()
