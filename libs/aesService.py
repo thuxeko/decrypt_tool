@@ -8,7 +8,7 @@ logging.basicConfig(filename="log_encrypt.log",
                     format='%(asctime)s %(message)s',
                     level=logging.INFO)
 
-class AESCipher(object):
+class AESService(object):
     def __init__(self, key): 
         self.bs = AES.block_size
         self.key = hashlib.sha256(key.encode()).digest()

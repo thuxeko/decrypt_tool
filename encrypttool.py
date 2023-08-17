@@ -4,8 +4,9 @@ from PyQt5.QtWidgets import *
 from PyQt5 import QtCore
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
-from libs.aesService import AESCipher
+from libs.aesService import AESService
 from libs.rsaService import RSAService
+from libs.aesCipher import AESCipher
 
 import logging
 import os
@@ -124,8 +125,12 @@ class MainWindow(QMainWindow):
         passPhrase = self.txtPassphrase.text()
         inputText = self.txtInput.toPlainText()
         if self.rbAES.isChecked():
-            aesCipher = AESCipher(passPhrase)
-            encryptSuccess = aesCipher.encrypt(inputText)
+            # aesCipher = AESService(passPhrase)
+            # encryptSuccess = aesCipher.encrypt(inputText)
+            
+            aess = AESCipher()
+            encryptSuccess = aess.encrypt(inputText, passPhrase)
+
             self.txtOutput.setPlainText(encryptSuccess)
             logging.info(
                 'AES - Encrypt: {}'.format(encryptSuccess))
@@ -141,8 +146,11 @@ class MainWindow(QMainWindow):
         inputText = self.txtInput.toPlainText()
 
         if self.rbAES.isChecked():
-            aesCipher = AESCipher(passPhrase)
-            decryptSuccess = aesCipher.decrypt(inputText)
+            # aesCipher = AESService(passPhrase)
+            # decryptSuccess = aesCipher.decrypt(inputText)
+
+            aess = AESCipher()
+            decryptSuccess = aess.decrypt(inputText, passPhrase)
         elif self.rbRSA.isChecked():
             rsaCipher = RSAService(
                 rsaConfig['private'], rsaConfig['public'])
